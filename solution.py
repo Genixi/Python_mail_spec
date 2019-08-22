@@ -1,4 +1,5 @@
 import os
+import csv
 
 class CarBase:
 	def __init__(self, brand, photo_file_name, carrying):
@@ -63,6 +64,18 @@ class SpecMachine(CarBase):
 		self.car_type = "spec_machine"
 
 def get_car_list(csv_filename):
-	car_list = []
+	with open(csv_filename) as csv_fd:
+		reader = csv.reader(csv_fd, delimiter = ';')
+		next(reader)
+		car_list = []
+		for row in reader:
+			row_list = row.split(";")
+			if row_list[0] == "car":
+				car_list.append(Car(row_list[1], row_list[3], row_list[-1], row_list[2]))
+			elif row_list[0] == "truck":
+				car_list.append(Truck(row_list[1], row_list[3], row_list[-1], row_list[-2]))
+			elif row_list[0] == "spec_machine":
+				car_list.append(SpecMachine(ro_list[1], row_list[3], row_list[-2], row_list[-1]))
+
 	return car_list
 		
