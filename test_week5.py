@@ -1,29 +1,9 @@
 
-"""
-    Это unittest для тестирования вашего класса Client из задания на неделе 5.
-
-    Для запуска теста на локальном компьютере разместите код unittest-та
-    и код решения в одном каталоге. Запустите тест при помощи команды:
-
-        python -m unittest test_week5.py
-
-    Обратите внимание на то, что ваш модуль должен называться client.py.
-    Это не обязательное требование, если вы назвали мобуль по-другому, то
-    просто измените его импорт в строке 26 на:
-        from you_module_name import Client, ClientError
-
-    Модуль должен содержать классы Client и ClientError.
-
-    Этот unittest поможет вам выполнить задание и пройти проверку на курсере.
-    Успехов!
-"""
-
 import unittest
 from unittest.mock import patch
 from collections import deque
 
-# импорт модуля с решением
-from client import Client, ClientError
+from tcp_client import Client, ClientError
 
 
 class ServerSocketException(Exception):
@@ -155,4 +135,4 @@ class TestClient(unittest.TestCase):
                               self.client.get, "get_client_error")
         except ServerSocketException as exp:
             message = exp.args[0]
-            self.fail(f"некорректно обработано сообщение сервера об ошибке: {message}")
+            self.fail(f"Некорректно обработано сообщение сервера об ошибке: {message}")
